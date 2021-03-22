@@ -1,0 +1,895 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "Account": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "filterConditions": [{
+          "field": "FinServ__IndividualType__c",
+          "value": "Individual",
+          "operator": "="
+        }],
+        "fields": [
+          {"name": "FinServ__PrimaryContact__c"},
+          {"name": "OwnerId"},
+          {"name": "Description"},
+          {"name": "Fax"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "AccountNumber"},
+          {"name": "Phone"},
+          {"name": "Rating"},
+          {"name": "Site"},
+          {"name": "AccountSource"},
+          {"name": "Type"},
+          {"name": "AnnualRevenue"},
+          {"name": "FinServ__AUM__c"},
+          {"name": "BillingCity"},
+          {"name": "BillingCountry"},
+          {"name": "BillingGeocodeAccuracy"},
+          {"name": "BillingState"},
+          {"name": "BillingStreet"},
+          {"name": "BillingPostalCode"},
+          {"name": "FinServ__ClientCategory__c"},
+          {"name": "CreatedDate"},
+          {"name": "Jigsaw"},
+          {"name": "NumberOfEmployees"},
+          {"name": "FinServ__FinancialInterests__c"},
+          {"name": "FinServ__Notes__c"},
+          {"name": "FinServ__IndividualId__c"},
+          {"name": "FinServ__IndividualType__c"},
+          {"name": "Industry"},
+          {"name": "FinServ__InvestmentExperience__c"},
+          {"name": "FinServ__InvestmentObjectives__c"},
+          {"name": "JigsawCompanyId"},
+          {"name": "LastActivityDate"},
+          {"name": "FinServ__LastInteraction__c"},
+          {"name": "LastModifiedDate"},
+          {"name": "LastReferencedDate"},
+          {"name": "FinServ__LastReview__c"},
+          {"name": "LastViewedDate"},
+          {"name": "FinServ__MarketingSegment__c"},
+          {"name": "FinServ__NetWorth__c"},
+          {"name": "FinServ__NextInteraction__c"},
+          {"name": "FinServ__NextReview__c"},
+          {"name": "Ownership"},
+          {"name": "FinServ__PersonalInterests__c"},
+          {"name": "PhotoUrl"},
+          {"name": "FinServ__ReviewFrequency__c"},
+          {"name": "FinServ__RiskTolerance__c"},
+          {"name": "FinServ__ServiceModel__c"},
+          {"name": "ShippingCity"},
+          {"name": "ShippingCountry"},
+          {"name": "ShippingGeocodeAccuracy"},
+          {"name": "ShippingState"},
+          {"name": "ShippingStreet"},
+          {"name": "ShippingPostalCode"},
+          {"name": "Sic"},
+          {"name": "SicDesc"},
+          {"name": "FinServ__SourceSystemId__c"},
+          {"name": "FinServ__Status__c"},
+          {"name": "SystemModstamp"},
+          {"name": "TickerSymbol"},
+          {"name": "FinServ__TimeHorizon__c"},
+          {"name": "FinServ__TotalAUMJointOwner__c"},
+          {"name": "FinServ__TotalAUMPrimaryOwner__c"},
+          {"name": "FinServ__TotalBankDeposits__c"},
+          {"name": "FinServ__TotalBankDepositsJointOwner__c"},
+          {"name": "FinServ__TotalBankDepositsPrimaryOwner__c"},
+          {"name": "FinServ__TotalFinancialAccounts__c"},
+          {"name": "FinServ__TotalFinAcctsJointOwner__c"},
+          {"name": "FinServ__TotalFinAcctsPrimaryOwner__c"},
+          {"name": "FinServ__TotalHeldFinAcctsJointOwner__c"},
+          {"name": "FinServ__TotalHeldFinAcctsPrimaryOwner__c"},
+          {"name": "FinServ__TotalInsurance__c"},
+          {"name": "FinServ__TotalInsuranceJointOwner__c"},
+          {"name": "FinServ__TotalInsurancePrimaryOwner__c"},
+          {"name": "FinServ__TotalInvestments__c"},
+          {"name": "FinServ__TotalInvestmentsJointOwner__c"},
+          {"name": "FinServ__TotalInvestmentsPrimaryOwner__c"},
+          {"name": "FinServ__TotalLiabilities__c"},
+          {"name": "FinServ__TotalLiabilitiesJointOwner__c"},
+          {"name": "FinServ__TotalLiabilitiesPrimaryOwner__c"},
+          {"name": "FinServ__TotalNonfinancialAssets__c"},
+          {"name": "FinServ__TotalNonfinancialAssetsJointOwner__c"},
+          {"name": "FinServ__TotalNonfinancialAssetsPrimaryOwner__c"},
+          {"name": "FinServ__WalletShare__c"},
+          {"name": "Website"},
+          {"name": "ParentId"}
+        ],
+        "object": "Account"
+      }
+    },
+    "Extract_DataAccess_Account": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Augment_Account_UserWithRoles",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "WavePermissions",
+          "saqlExpression": "\"View All\"",
+          "type": "Text"
+        }]
+      }
+    },
+    "FSC_Register_Task": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": "'WavePermissions' == \"$User.FSC_WavePermissions__c\" || 'OwnerId' == \"$User.Id\"",
+        "name": "ConsumerBanking_Activities",
+        "alias": "${App.Datasets.ConsumerBanking_Activities_tp.FullyQualifiedName}",
+        "source": "Augment_User_onto_Task"
+      }
+    },
+    "FSC_Augment_Account_onto_Task": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "right_select": [
+          "Name",
+          "FinServ__FinancialInterests__c",
+          "FinServ__InvestmentObjectives__c",
+          "FinServ__MarketingSegment__c",
+          "FinServ__RiskTolerance__c",
+          "FinServ__Status__c"
+        ],
+        "left_key": ["AccountId"],
+        "left": "FSC_Digest_Task",
+        "right": "Account",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Register_Lead": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": "'WavePermissions' == \"$User.FSC_WavePermissions__c\" || 'OwnerId' == \"$User.Id\"",
+        "name": "ConsumerBanking_Lead",
+        "alias": "${App.Datasets.ConsumerBanking_Lead_tp.FullyQualifiedName}",
+        "source": "Compute_WavePermissions_Lead"
+      }
+    },
+    "Extract_FinancialAccount": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "FinServ__FinancialAccountNumber__c"},
+          {"name": "OwnerId"},
+          {"name": "FinServ__PrimaryOwner__c"},
+          {"name": "FinServ__Address1__c"},
+          {"name": "FinServ__Address2__c"},
+          {"name": "FinServ__ApplicationDate__c"},
+          {"name": "FinServ__AssetRebalance__c"},
+          {"name": "FinServ__AverageBalance__c"},
+          {"name": "FinServ__Balance__c"},
+          {"name": "FinServ__CashBalance__c"},
+          {"name": "FinServ__City__c"},
+          {"name": "FinServ__Country__c"},
+          {"name": "CreatedDate"},
+          {"name": "FinServ__CloseDate__c"},
+          {"name": "FinServ__OpenDate__c"},
+          {"name": "FinServ__Description__c"},
+          {"name": "FinServ__Discretionary__c"},
+          {"name": "Name"},
+          {"name": "FinServ__HeldAway__c"},
+          {"name": "FinServ__InsuredAmount__c"},
+          {"name": "FinServ__InvestmentObjectives__c"},
+          {"name": "LastActivityDate"},
+          {"name": "LastModifiedDate"},
+          {"name": "LastReferencedDate"},
+          {"name": "FinServ__LastUpdated__c"},
+          {"name": "LastViewedDate"},
+          {"name": "FinServ__Managed__c"},
+          {"name": "FinServ__MinimumBalance__c"},
+          {"name": "FinServ__ModelPortfolio__c"},
+          {"name": "FinServ__HoldingCount__c"},
+          {"name": "FinServ__OwnerType__c"},
+          {"name": "FinServ__Ownership__c"},
+          {"name": "FinServ__PaperlessDelivery__c"},
+          {"name": "FinServ__Performance1Yr__c"},
+          {"name": "FinServ__Performance3Yr__c"},
+          {"name": "FinServ__PerformanceMTD__c"},
+          {"name": "FinServ__PerformanceQTD__c"},
+          {"name": "FinServ__PerformanceYTD__c"},
+          {"name": "FinServ__PostalCode__c"},
+          {"name": "FinServ__Premium__c"},
+          {"name": "FinServ__RebalanceFrequency__c"},
+          {"name": "Id"},
+          {"name": "FinServ__RecordTypeName__c"},
+          {"name": "FinServ__RenewalDate__c"},
+          {"name": "FinServ__ServiceProvider__c"},
+          {"name": "FinServ__FinancialAccountSource__c"},
+          {"name": "FinServ__SourceSystemId__c"},
+          {"name": "FinServ__State__c"},
+          {"name": "FinServ__Status__c"},
+          {"name": "SystemModstamp"},
+          {"name": "FinServ__TaxID__c"},
+          {"name": "FinServ__TaxStatus__c"},
+          {"name": "FinServ__TimeHorizon__c"},
+          {"name": "FinServ__FinancialAccountType__c"},
+          {"name": "FinServ__Household__c"}
+        ],
+        "object": "FinServ__FinancialAccount__c"
+      }
+    },
+    "FSC_Register_Opportunity": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": "'WavePermissions' == \"$User.FSC_WavePermissions__c\" || 'OwnerId' == \"$User.Id\"",
+        "name": "ConsumerBanking_Opportunity",
+        "alias": "${App.Datasets.ConsumerBanking_Opportunity_tp.FullyQualifiedName}",
+        "source": "Add_WavePermissions_Field_Opp"
+      }
+    },
+    "Extract_User": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "filterConditions": [{
+          "field": "IsActive",
+          "value": "true",
+          "operator": "="
+        }],
+        "fields": [
+          {"name": "Id"},
+          {"name": "Username"},
+          {"name": "LastName"},
+          {"name": "FirstName"},
+          {"name": "Name"},
+          {"name": "UserRoleId"},
+          {"name": "City"},
+          {"name": "CompanyName"},
+          {"name": "Country"},
+          {"name": "CreatedDate"},
+          {"name": "Division"},
+          {"name": "Department"},
+          {"name": "IsActive"},
+          {"name": "PostalCode"},
+          {"name": "State"},
+          {"name": "UserType"}
+        ],
+        "object": "User"
+      }
+    },
+    "Register_Account": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": "'WavePermissions' == \"$User.FSC_WavePermissions__c\" || 'OwnerId' == \"$User.Id\"",
+        "name": "ConsumerBanking_Account",
+        "alias": "${App.Datasets.ConsumerBanking_Account_tp.FullyQualifiedName}",
+        "source": "Augment_FinancialAccount_onto_Account"
+      }
+    },
+    "Digest_RecordType": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "IsActive"}
+        ],
+        "object": "RecordType"
+      }
+    },
+    "FSC_Digest_Lead": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "ConvertedAccountId"},
+          {"name": "ConvertedContactId"},
+          {"name": "ConvertedDate"},
+          {"name": "ConvertedOpportunityId"},
+          {"name": "Country"},
+          {"name": "CreatedDate"},
+          {"name": "Id"},
+          {"name": "Industry"},
+          {"name": "IsConverted"},
+          {"name": "LastActivityDate"},
+          {"name": "LeadSource"},
+          {"name": "MasterRecordId"},
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "RecordTypeId"},
+          {"name": "Status"},
+          {"name": "City"},
+          {"name": "FinServ__ConversionDateTime__c"},
+          {"name": "FinServ__CreatedFromLead__c"},
+          {"name": "FinServ__Employer__c"},
+          {"name": "FinServ__ExpressedInterest__c"},
+          {"name": "FinServ__Household__c"},
+          {"name": "FinServ__PotentialValue__c"},
+          {"name": "FinServ__ReferredByContact__c"},
+          {"name": "FinServ__ReferredByUser__c"},
+          {"name": "FinServ__ReferrerScore__c"},
+          {"name": "FinServ__RelatedAccount__c"},
+          {"name": "LastViewedDate"},
+          {"name": "NumberOfEmployees"},
+          {"name": "PhotoUrl"},
+          {"name": "PostalCode"},
+          {"name": "Rating"},
+          {"name": "State"},
+          {"name": "Title"}
+        ],
+        "object": "Lead"
+      }
+    },
+    "Reveue_Account_lookup": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "right_select": [
+          "Description",
+          "Fax",
+          "Id",
+          "OwnerId",
+          "Name",
+          "AccountNumber",
+          "Phone",
+          "Rating",
+          "Site",
+          "AccountSource",
+          "Type",
+          "AnnualRevenue",
+          "FinServ__AUM__c",
+          "BillingCity",
+          "BillingCountry",
+          "BillingGeocodeAccuracy",
+          "BillingState",
+          "BillingStreet",
+          "BillingPostalCode",
+          "FinServ__ClientCategory__c",
+          "CreatedDate",
+          "Jigsaw",
+          "NumberOfEmployees",
+          "FinServ__FinancialInterests__c",
+          "FinServ__Notes__c",
+          "FinServ__IndividualId__c",
+          "FinServ__IndividualType__c",
+          "Industry",
+          "FinServ__InvestmentExperience__c",
+          "FinServ__InvestmentObjectives__c",
+          "JigsawCompanyId",
+          "LastActivityDate",
+          "FinServ__LastInteraction__c",
+          "LastModifiedDate",
+          "LastReferencedDate",
+          "FinServ__LastReview__c",
+          "LastViewedDate",
+          "FinServ__MarketingSegment__c",
+          "FinServ__NetWorth__c",
+          "FinServ__NextInteraction__c",
+          "FinServ__NextReview__c",
+          "Ownership",
+          "FinServ__PersonalInterests__c",
+          "PhotoUrl",
+          "FinServ__ReviewFrequency__c",
+          "FinServ__RiskTolerance__c",
+          "FinServ__ServiceModel__c",
+          "ShippingCity",
+          "ShippingCountry",
+          "ShippingGeocodeAccuracy",
+          "ShippingState",
+          "ShippingStreet",
+          "ShippingPostalCode",
+          "Sic",
+          "SicDesc",
+          "FinServ__SourceSystemId__c",
+          "FinServ__Status__c",
+          "SystemModstamp",
+          "TickerSymbol",
+          "FinServ__TimeHorizon__c",
+          "FinServ__TotalAUMJointOwner__c",
+          "FinServ__TotalAUMPrimaryOwner__c",
+          "FinServ__TotalBankDeposits__c",
+          "FinServ__TotalBankDepositsJointOwner__c",
+          "FinServ__TotalBankDepositsPrimaryOwner__c",
+          "FinServ__TotalFinancialAccounts__c",
+          "FinServ__TotalFinAcctsJointOwner__c",
+          "FinServ__TotalFinAcctsPrimaryOwner__c",
+          "FinServ__TotalHeldFinAcctsJointOwner__c",
+          "FinServ__TotalHeldFinAcctsPrimaryOwner__c",
+          "FinServ__TotalInsurance__c",
+          "FinServ__TotalInsuranceJointOwner__c",
+          "FinServ__TotalInsurancePrimaryOwner__c",
+          "FinServ__TotalInvestments__c",
+          "FinServ__TotalInvestmentsJointOwner__c",
+          "FinServ__TotalInvestmentsPrimaryOwner__c",
+          "FinServ__TotalLiabilities__c",
+          "FinServ__TotalLiabilitiesJointOwner__c",
+          "FinServ__TotalLiabilitiesPrimaryOwner__c",
+          "FinServ__TotalNonfinancialAssets__c",
+          "FinServ__TotalNonfinancialAssetsJointOwner__c",
+          "FinServ__TotalNonfinancialAssetsPrimaryOwner__c",
+          "FinServ__WalletShare__c",
+          "Website",
+          "ParentId"
+        ],
+        "left_key": ["FinServ__Account__c"],
+        "left": "Revenue",
+        "right": "Account",
+        "relationship": "FinServ__Account__c"
+      }
+    },
+    "Add_WavePermissions_Field_Opp": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Augment_Account_onto_Opportunity",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "WavePermissions",
+          "saqlExpression": "\"View All\"",
+          "label": "WavePermissions",
+          "type": "Text"
+        }]
+      }
+    },
+    "FSC_Digest_Opportunity": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "Amount"},
+          {"name": "CloseDate"},
+          {"name": "ForecastCategory"},
+          {"name": "IsClosed"},
+          {"name": "IsWon"},
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "Probability"},
+          {"name": "StageName"},
+          {"name": "Type"},
+          {"name": "LastModifiedDate"},
+          {"name": "CreatedDate"},
+          {"name": "Id"}
+        ],
+        "object": "Opportunity"
+      }
+    },
+    "Augment_Opp_onto_Lead": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "right_select": [
+          "Id",
+          "Amount",
+          "IsClosed",
+          "IsWon"
+        ],
+        "left_key": ["ConvertedOpportunityId"],
+        "left": "Augment_RecordType_onto_Lead",
+        "right": "FSC_Digest_Opportunity",
+        "relationship": "ConvertedOpp",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Augment_User_onto_Opp": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "right_select": [
+          "Username",
+          "LastName",
+          "FirstName",
+          "Name",
+          "Role.RolePath",
+          "Role.Roles",
+          "UserRoleId"
+        ],
+        "left_key": ["OwnerId"],
+        "left": "FSC_Digest_Opportunity",
+        "right": "Augment_User_FlattenUserRole",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Augment_Account_onto_Opportunity": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "right_select": [
+          "Name",
+          "FinServ__RiskTolerance__c",
+          "FinServ__InvestmentObjectives__c",
+          "FinServ__FinancialInterests__c"
+        ],
+        "left_key": ["AccountId"],
+        "left": "Augment_User_onto_Opp",
+        "right": "Account",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "FSC_Digest_Task": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "OwnerId"},
+          {"name": "IsArchived"},
+          {"name": "CallDurationInSeconds"},
+          {"name": "CallObject"},
+          {"name": "CallDisposition"},
+          {"name": "CallType"},
+          {"name": "IsClosed"},
+          {"name": "IsRecurrence"},
+          {"name": "CreatedDate"},
+          {"name": "Description"},
+          {"name": "ActivityDate"},
+          {"name": "RecurrenceEndDateOnly"},
+          {"name": "FinServ__Expectations__c"},
+          {"name": "FinServ__NextSteps__c"},
+          {"name": "FinServ__Objectives__c"},
+          {"name": "IsHighPriority"},
+          {"name": "LastModifiedDate"},
+          {"name": "Priority"},
+          {"name": "RecurrenceDayOfMonth"},
+          {"name": "RecurrenceDayOfWeekMask"},
+          {"name": "RecurrenceInstance"},
+          {"name": "RecurrenceInterval"},
+          {"name": "RecurrenceMonthOfYear"},
+          {"name": "RecurrenceTimeZoneSidKey"},
+          {"name": "RecurrenceType"},
+          {"name": "FinServ__Regarding__c"},
+          {"name": "ReminderDateTime"},
+          {"name": "IsReminderSet"},
+          {"name": "RecurrenceRegeneratedType"},
+          {"name": "RecurrenceStartDateOnly"},
+          {"name": "Status"},
+          {"name": "Subject"},
+          {"name": "RecordTypeId"},
+          {"name": "Type"},
+          {"name": "TaskSubtype"},
+          {"name": "FinServ__Household__c"},
+          {"name": "Id"}
+        ],
+        "object": "Task"
+      }
+    },
+    "Augment_Account_Revenue_UserWithRoles": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "right_select": [
+          "Name",
+          "Role.Roles",
+          "Role.RolePath"
+        ],
+        "left_key": ["OwnerId"],
+        "left": "Reveue_Account_lookup",
+        "right": "Augment_User_FlattenUserRole",
+        "relationship": "Owner"
+      }
+    },
+    "Compute_WavePermissions_Lead": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Augment_Opp_onto_Lead",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "WavePermissions",
+          "saqlExpression": "\"View All\"",
+          "label": "WavePermissions",
+          "type": "Text"
+        }]
+      }
+    },
+    "Augment_Task_onto_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["AccountId"],
+        "right_select": [
+          "Type",
+          "FinServ__Regarding__c"
+        ],
+        "left_key": ["Id"],
+        "left": "Augment_FSC_Account_Revenue_onto_FSC_Account",
+        "right": "FSC_Digest_Task",
+        "relationship": "Task",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Augment_User_FlattenUserRole": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "right_select": [
+          "Roles",
+          "RolePath"
+        ],
+        "left_key": ["UserRoleId"],
+        "left": "Extract_User",
+        "right": "Flatten_UserRole",
+        "relationship": "Role"
+      }
+    },
+    "Augment_Account_UserWithRoles": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "right_select": [
+          "Name",
+          "Role.Roles",
+          "Role.RolePath",
+          "UserRoleId",
+          "Id",
+          "Username"
+        ],
+        "left_key": ["OwnerId"],
+        "left": "Account",
+        "right": "Augment_User_FlattenUserRole",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Extract_DataAccess_Account_Revenue": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Augment_Account_Revenue_UserWithRoles",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "WavePermissions",
+          "saqlExpression": "\"View All\"",
+          "type": "Text"
+        }]
+      }
+    },
+    "Contact": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "filterConditions": [{
+          "field": "FinServ__IndividualType__c",
+          "value": "Individual",
+          "operator": "="
+        }],
+        "fields": [
+          {"name": "FinServ__Age__c"},
+          {"name": "OwnerId"},
+          {"name": "FinServ__AgeAsText__c"},
+          {"name": "FinServ__AnnualIncome__c"},
+          {"name": "AssistantName"},
+          {"name": "AssistantPhone"},
+          {"name": "FinServ__BillingAddress__c"},
+          {"name": "Birthdate"},
+          {"name": "Fax"},
+          {"name": "Phone"},
+          {"name": "FinServ__Citizenship__c"},
+          {"name": "Description"},
+          {"name": "Id"},
+          {"name": "FinServ__CountryOfResidence__c"},
+          {"name": "CreatedDate"},
+          {"name": "FinServ__CreatedFromLead__c"},
+          {"name": "FinServ__CurrentEmployer__c"},
+          {"name": "Jigsaw"},
+          {"name": "Department"},
+          {"name": "FinServ__NumberOfDependents__c"},
+          {"name": "Email"},
+          {"name": "EmailBouncedDate"},
+          {"name": "EmailBouncedReason"},
+          {"name": "FinServ__EmployedSince__c"},
+          {"name": "FinServ__Facebook__c"},
+          {"name": "FirstName"},
+          {"name": "Name"},
+          {"name": "FinServ__Gender__c"},
+          {"name": "HomePhone"},
+          {"name": "FinServ__IndividualId__c"},
+          {"name": "FinServ__IndividualType__c"},
+          {"name": "IsEmailBounced"},
+          {"name": "JigsawContactId"},
+          {"name": "FinServ__LanguagesSpoken__c"},
+          {"name": "LastActivityDate"},
+          {"name": "LastModifiedDate"},
+          {"name": "LastName"},
+          {"name": "LastReferencedDate"},
+          {"name": "LastCURequestDate"},
+          {"name": "LastCUUpdateDate"},
+          {"name": "LastViewedDate"},
+          {"name": "LeadSource"},
+          {"name": "FinServ__LinkedIn__c"},
+          {"name": "FinServ__MailingAddress__c"},
+          {"name": "MailingCity"},
+          {"name": "MailingCountry"},
+          {"name": "MailingGeocodeAccuracy"},
+          {"name": "MailingState"},
+          {"name": "MailingStreet"},
+          {"name": "MailingPostalCode"},
+          {"name": "FinServ__MaritalStatus__c"},
+          {"name": "MobilePhone"},
+          {"name": "FinServ__Occupation__c"},
+          {"name": "FinServ__OtherAddress__c"},
+          {"name": "OtherCity"},
+          {"name": "OtherCountry"},
+          {"name": "OtherGeocodeAccuracy"},
+          {"name": "OtherPhone"},
+          {"name": "OtherState"},
+          {"name": "OtherStreet"},
+          {"name": "OtherPostalCode"},
+          {"name": "PhotoUrl"},
+          {"name": "FinServ__PrimaryAddressIsBilling__c"},
+          {"name": "FinServ__PrimaryAddressIsMailing__c"},
+          {"name": "FinServ__PrimaryAddressIsOther__c"},
+          {"name": "FinServ__PrimaryAddressIsShipping__c"},
+          {"name": "Salutation"},
+          {"name": "FinServ__ShippingAddress__c"},
+          {"name": "FinServ__SourceSystemId__c"},
+          {"name": "SystemModstamp"},
+          {"name": "FinServ__TaxBracket__c"},
+          {"name": "FinServ__TaxId__c"},
+          {"name": "Title"},
+          {"name": "FinServ__Twitter__c"},
+          {"name": "FinServ__WeddingAnniversary__c"}
+        ],
+        "object": "Contact"
+      }
+    },
+    "Augment_FinancialAccount_onto_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["OwnerId"],
+        "right_select": ["FinServ__Household__c"],
+        "left_key": ["OwnerId"],
+        "left": "FSC_Augment_Contact_onto_Account",
+        "right": "Extract_FinancialAccount",
+        "relationship": "FinancialAccount",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Augment_FSC_Account_Revenue_onto_FSC_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["FinServ__Account__c.Id"],
+        "right_select": [
+          "FinServ__Account__c.FinServ__Status__c",
+          "FinServ__Account__c.FinServ__TimeHorizon__c",
+          "FinServ__FinancialAccount__c",
+          "FinServ__Account__c.ParentId"
+        ],
+        "left_key": ["Id"],
+        "left": "Extract_DataAccess_Account",
+        "right": "Extract_DataAccess_Account_Revenue",
+        "relationship": "FSC_Account_Revenue",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Augment_User_onto_Task": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "right_select": [
+          "Role.Roles",
+          "Username",
+          "Role.RolePath",
+          "Name",
+          "Id",
+          "UserRoleId"
+        ],
+        "left_key": ["OwnerId"],
+        "left": "FSC_format_CreatedDate",
+        "right": "Augment_User_FlattenUserRole",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "FSC_Augment_Contact_onto_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "right_select": [
+          "FinServ__Age__c",
+          "FinServ__AnnualIncome__c",
+          "FinServ__NumberOfDependents__c",
+          "Email",
+          "FirstName",
+          "Name",
+          "FinServ__Gender__c",
+          "HomePhone",
+          "FinServ__IndividualType__c",
+          "FinServ__LanguagesSpoken__c",
+          "LastActivityDate",
+          "LastName",
+          "LastViewedDate",
+          "LeadSource",
+          "FinServ__MailingAddress__c",
+          "FinServ__MaritalStatus__c",
+          "FinServ__Occupation__c",
+          "FinServ__TaxBracket__c",
+          "Id"
+        ],
+        "left_key": ["FinServ__PrimaryContact__c"],
+        "left": "Augment_Task_onto_Account",
+        "right": "Contact",
+        "relationship": "FinServPrimaryContact",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Extract_UserRole": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "ParentRoleId"},
+          {"name": "PortalAccountId"},
+          {"name": "PortalAccountOwnerId"}
+        ],
+        "object": "UserRole"
+      }
+    },
+    "Revenue": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "FinServ__Amount__c"},
+          {"name": "CreatedDate"},
+          {"name": "FinServ__Date__c"},
+          {"name": "LastModifiedDate"},
+          {"name": "Id"},
+          {"name": "OwnerId"},
+          {"name": "Name"},
+          {"name": "FinServ__SubType__c"},
+          {"name": "SystemModstamp"},
+          {"name": "FinServ__Type__c"},
+          {"name": "FinServ__Account__c"},
+          {"name": "FinServ__FinancialAccount__c"}
+        ],
+        "object": "FinServ__Revenue__c"
+      }
+    },
+    "Flatten_UserRole": {
+      "action": "flatten",
+      "parameters": {
+        "self_field": "Id",
+        "multi_field": "Roles",
+        "parent_field": "ParentRoleId",
+        "path_field": "RolePath",
+        "source": "Extract_UserRole"
+      }
+    },
+    "FSC_format_CreatedDate": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "FSC_Augment_Account_onto_Task",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "saqlExpression": "toDate('CreatedDate_Year'+\"-\"+'CreatedDate_Month'+\"-\"+'CreatedDate_Day', \"yyyy-MM-dd\")",
+            "name": "CreatedDateFormatted",
+            "format": "yyyy-MM-dd",
+            "label": "Date Created",
+            "type": "Date"
+          },
+          {
+            "name": "WavePermissions",
+            "saqlExpression": "\"View All\"",
+            "label": "WavePermissions",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "Augment_RecordType_onto_Lead": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "right_select": [
+          "Name",
+          "IsActive"
+        ],
+        "left_key": ["RecordTypeId"],
+        "left": "FSC_Digest_Lead",
+        "right": "Digest_RecordType",
+        "relationship": "RecordType",
+        "operation": "LookupSingleValue"
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "Dataflow for the consumer Banking Analytics Template",
+  "MasterLabel": "Dataflow",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "RetailBankingStarterDataflow",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}

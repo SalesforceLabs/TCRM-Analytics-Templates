@@ -1,0 +1,128 @@
+{
+  "templateType": "app",
+  "label": "Consumer Banking Starter Analytics",
+  "name": "ConsumerBankingAnalyticsStarter",
+  "description": "Puts the power of Einstein Analytics into the hands of relationship managers to help them move customers up the value chain and increase assets under management. v1.3",
+  "assetVersion": 51.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
+    {
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
+    },
+    {
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo": {
+    "templateVersion": "1.3",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "externalFiles": [],
+  "lenses": [],
+  "dashboards": [
+    {
+      "label": "Consumer Banking Starter Analytics",
+      "name": "Consumer_Banking1_tp",
+      "file": "dashboards/Consumer_Banking1.json"
+    }
+  ],
+  "eltDataflows": [
+    {
+      "label": "Dataflow",
+      "name": "RetailBankingStarterDataflow",
+      "file": "dataflow/RetailBankingStarterDataflow.json"
+    }
+  ],
+  "recipes": [],
+  "datasetFiles": [
+    {
+      "label": "ConsumerBanking_Account",
+      "name": "ConsumerBanking_Account_tp",
+      "userXmd": "dataset_files/ConsumerBanking_Account_XMD.json"
+    },
+    {
+      "label": "ConsumerBanking_Activities",
+      "name": "ConsumerBanking_Activities_tp",
+      "userXmd": "dataset_files/ConsumerBanking_Activities_XMD.json"
+    },
+    {
+      "label": "ConsumerBanking_Lead",
+      "name": "ConsumerBanking_Lead_tp",
+      "userXmd": "dataset_files/ConsumerBanking_Lead_XMD.json"
+    },
+    {
+      "label": "ConsumerBanking_Opportunity",
+      "name": "ConsumerBanking_Opportunity_tp",
+      "userXmd": "dataset_files/ConsumerBanking_Opportunity_XMD.json"
+    }
+  ],
+  "apexCallback": {
+    "name": "RetailBankingConfigurationModifier"
+  },
+  "storedQueries": [],
+  "imageFiles": [
+    {
+      "name": "RetailLogo1",
+      "file": "images/RetailLogo.png"
+    }
+  ],
+  "tags": [
+    "Customer 360",
+    "Retail Banking"
+  ],
+  "customAttributes": [
+    {
+      "label": "Features",
+      "values": [
+        "View your Book of Business",
+        "Prioritize Opportunities",
+        "Manage Leads and Referrals"
+      ]
+    },
+    {
+      "label": "Salesforce Objects",
+      "values": [
+        "Account",
+        "Contact",
+        "Financial Accounts",
+        "Lead",
+        "Opportunity",
+        "RecordType",
+        "Revenue",
+        "Task",
+        "User",
+        "UserRole"
+      ]
+    },
+    {
+      "label": "Publisher",
+      "values": [
+        "Einstein Analytics"
+      ]
+    },
+    {
+      "label": "Industry",
+      "values": [
+        "Financial Services"
+      ]
+    }
+  ],
+  "extendedTypes": {},
+  "templateDependencies": [],
+  "icons": {
+    "templateBadge": {
+      "name": "financial-services.png"
+    },
+    "templatePreviews": [
+      {
+        "name": "preview_ConsumerBanking.png",
+        "label": "Consumer Banking Starter Analytics",
+        "description": "Personal Bankers can take advantage of these dashboards to manage their book of business and referrals."
+      }
+    ]
+  }
+}

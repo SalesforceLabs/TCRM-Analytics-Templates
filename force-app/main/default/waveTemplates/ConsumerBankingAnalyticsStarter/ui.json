@@ -1,0 +1,28 @@
+{
+  "pages": [
+    {
+      "title": "Create Consumer Banking Starter Analytics App", 
+      "variables": [
+        {
+          "name": "Can_Continue"
+        }, 
+        {
+          "name": "autoconfig"
+        }
+      ], 
+      "vfPage": {
+        "name": "retailbanking_checklist"
+      }, 
+      "helpUrl": "https://help.salesforce.com/articleView?id=bi_template_retail_banking.htm"
+    }, 
+    {
+      "title": "Personalize Consumer Banking Starter Analytics App", 
+      "variables": [
+        {
+          "name": "enableSecurityPredicate", 
+          "visibility": "Visible"
+        }
+      ]
+    }
+  ]
+}

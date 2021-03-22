@@ -1,0 +1,41 @@
+{
+  "constants": [
+    { 
+      "name": "hasSecurityPredicate",
+      "value": "${Variables.enableSecurityPredicate == 'Yes'}"
+    }
+   ],
+"rules":[
+ {
+      "name": "RemoveSecurityPredicatesFromDataflow",
+      "condition": "${!Constants.hasSecurityPredicate}",
+      "appliesTo": [
+        {
+          "type": "workflow",
+          "name": "RetailBankingStarterDataflow"
+        }
+      ],
+      "actions": [
+        {
+          "action": "delete",
+          "description": "delete security predicates from workflow",
+          "path": "$.workflowDefinition.FSC_Register_Task.parameters.rowLevelSecurityFilter"
+        },
+        {
+          "action": "delete",
+          "description": "delete security predicates from workflow",
+          "path": "$.workflowDefinition.Register_Lead.parameters.rowLevelSecurityFilter"
+        },
+        {
+          "action": "delete",
+          "description": "delete security predicates from workflow",
+          "path": "$.workflowDefinition.FSC_Register_Opportunity.parameters.rowLevelSecurityFilter"
+        },
+        {
+          "action": "delete",
+          "description": "delete security predicates from workflow",
+          "path": "$.workflowDefinition.Register_Account.parameters.rowLevelSecurityFilter"
+        }
+       ]
+ }
+]}

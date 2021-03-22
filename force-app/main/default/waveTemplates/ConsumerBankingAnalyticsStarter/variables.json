@@ -1,0 +1,61 @@
+{
+  "autoconfig": {
+     "label": "Auto Configure",
+     "description": "Automatically configures app for launch",
+     "defaultValue": "true",
+     "variableType": {
+       "type": "StringType",
+       "enums": [
+         "true",
+         "false"
+       ]
+     }
+   },
+  "enableSecurityPredicate": {
+     "label": "Would you like to add a security predicate to datasets?",
+     "description": "Security predicates ensure that a record can only be viewed by it's owner or by someone in a role with permission to view the record. Without a security predicate, all records are visible.",
+     "defaultValue": "No",
+     "required": true,
+     "variableType": {
+       "type": "StringType",
+       "enums": [
+         "No",
+         "Yes"
+       ]
+     }
+   },
+   "isCustomApp": {
+     "variableType": {
+       "type": "BooleanType"
+     },
+     "defaultValue": false
+   },
+ 
+  "DefaultsVisible": {
+     "variableType": {
+       "type": "BooleanType"
+     },
+     "defaultValue": true
+   },
+ 
+  "DefaultsVisibleMsg": {
+   "label": "A variable to store the generated msg of field visibility",
+   "description": "This isn't to be used directly.'",
+   "defaultValue": ["The Analytics Integration User needs access to all fields used to create the app."],
+   "required": false,
+   "variableType": {
+     "type": "ArrayType",
+     "itemsType": {
+       "type": "StringType"
+     }
+   }
+ },
+ 
+   "Can_Continue": {
+     "required": true,
+     "variableType": {
+       "type": "BooleanType"
+     }
+   }
+ }
+ 

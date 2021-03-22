@@ -1,0 +1,7 @@
+{
+  "class": "insights.api.template.policy.StandardPermissionsEnforcement",
+  "parameters": {
+    "canCreateApplication": "Insights.userCanCreateFSCApp",
+    "canViewApplication": "Insights.userCanViewFSCApp"
+  }
+}
