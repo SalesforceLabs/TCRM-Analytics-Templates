@@ -1,4 +1,4 @@
-global class RetailBankingChecklistRemoter{
+global with sharing class RetailBankingChecklistRemoter{
 
 global RetailBankingChecklistRemoter() {
 

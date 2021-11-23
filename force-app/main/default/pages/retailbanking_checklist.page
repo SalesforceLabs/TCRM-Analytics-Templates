@@ -489,7 +489,7 @@ function handleRemoteResponse(checklistItem, i, steps, result, event)
             //
             // // set the bubble message
             var bubble = document.getElementById('bubble-' + step_num);
-            bubble.firstElementChild.firstElementChild.innerHTML = '<div>' + result.messages.join('</div><div>') + '</div>';
+            bubble.firstElementChild.firstElementChild.innerHTML = '<div>' + result.messages.map(function(elem){ return escape(elem); }).join('</div><div>') + '</div>';
             //
             if(Browser === "IE" )
             {
@@ -531,7 +531,7 @@ function handleRemoteResponse(checklistItem, i, steps, result, event)
             }
             // set the bubble message
             var bubble = document.getElementById('bubble-' + step_num);
-            bubble.firstElementChild.firstElementChild.innerHTML = '<div>' + result.messages.join('</div><div>') + '</div>';
+            bubble.firstElementChild.firstElementChild.innerHTML = '<div>' + result.messages.map(function(elem){ return escape(elem); }).join('</div><div>') + '</div>';
             if(Browser === "IE" )
             {
                 var ieText = document.getElementById('bubble-ie-' + step_num + '-text');
