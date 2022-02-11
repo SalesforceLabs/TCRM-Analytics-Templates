@@ -1,1 +1,47 @@
-{"dates":[],"derivedDimensions":[],"derivedMeasures":[{"conditionalFormatting":{},"field":"C","format":{"customFormat":"[\"###%\",100]","delimiters":{}}}],"dimensions":[{"conditionalFormatting":{},"customActions":[],"field":"Id","linkTemplateEnabled":true,"members":[],"recordDisplayFields":["Id"],"recordIdField":"Id","salesforceActions":[],"salesforceActionsEnabled":false}],"measures":[{"field":"ConvertedOpp.Amount","format":{"customFormat":"[\"$#,###\",1]","delimiters":{}}},{"field":"FinServ__PotentialValue__c","format":{"customFormat":"[\"$#,###\",1]","delimiters":{}}}],"organizations":[],"showDetailsDefaultFields":[]}
+{
+    "dates": [],
+    "derivedDimensions": [],
+    "derivedMeasures": [
+        {
+            "conditionalFormatting": {},
+            "field": "C",
+            "format": {
+                "customFormat": "[\"###%\",100]",
+                "delimiters": {}
+            }
+        }
+    ],
+    "dimensions": [
+        {
+            "conditionalFormatting": {},
+            "customActions": [],
+            "field": "Id",
+            "linkTemplateEnabled": true,
+            "members": [],
+            "recordDisplayFields": [
+                "Id"
+            ],
+            "recordIdField": "Id",
+            "salesforceActions": [],
+            "salesforceActionsEnabled": false
+        }
+    ],
+    "measures": [
+        {
+            "field": "ConvertedOpp.Amount",
+            "format": {
+                "customFormat": "[\"$#,###\",1]",
+                "delimiters": {}
+            }
+        },
+        {
+            "field": "FinServ__PotentialValue__c",
+            "format": {
+                "customFormat": "[\"$#,###\",1]",
+                "delimiters": {}
+            }
+        }
+    ],
+    "organizations": [],
+    "showDetailsDefaultFields": []
+}

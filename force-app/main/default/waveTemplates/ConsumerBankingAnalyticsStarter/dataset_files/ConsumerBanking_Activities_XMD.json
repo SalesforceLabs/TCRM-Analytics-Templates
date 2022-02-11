@@ -1,1 +1,70 @@
-{"dates":[],"derivedDimensions":[],"derivedMeasures":[],"dimensions":[{"conditionalFormatting":{},"customActions":[],"field":"Account.FinServ__MarketingSegment__c","label":"Market Segment","members":[],"recordDisplayFields":[],"salesforceActions":[]},{"conditionalFormatting":{},"customActions":[],"field":"Account.FinServ__Status__c","label":"FinServ Status","members":[],"recordDisplayFields":[],"salesforceActions":[]},{"conditionalFormatting":{},"customActions":[],"field":"Account.Name","label":"Account Name","linkTemplateEnabled":true,"members":[],"recordDisplayFields":["AccountId","Account.Name"],"recordIdField":"AccountId","salesforceActions":[],"salesforceActionsEnabled":false},{"conditionalFormatting":{},"customActions":[],"field":"Account.FinServ__FinancialInterests__c","label":"FinServ Financial Interests","members":[],"recordDisplayFields":[],"salesforceActions":[]},{"conditionalFormatting":{},"customActions":[],"field":"Account.FinServ__InvestmentObjectives__c","label":"FinServ Investment Objectives","members":[],"recordDisplayFields":[],"salesforceActions":[]},{"conditionalFormatting":{},"customActions":[],"field":"Account.FinServ__RiskTolerance__c","label":"FinServ Risk Tolerance","members":[],"recordDisplayFields":[],"salesforceActions":[]}],"measures":[],"organizations":[],"showDetailsDefaultFields":[]}
+{
+    "dates": [],
+    "derivedDimensions": [],
+    "derivedMeasures": [],
+    "dimensions": [
+        {
+            "conditionalFormatting": {},
+            "customActions": [],
+            "field": "Account.FinServ__MarketingSegment__c",
+            "label": "Market Segment",
+            "members": [],
+            "recordDisplayFields": [],
+            "salesforceActions": []
+        },
+        {
+            "conditionalFormatting": {},
+            "customActions": [],
+            "field": "Account.FinServ__Status__c",
+            "label": "FinServ Status",
+            "members": [],
+            "recordDisplayFields": [],
+            "salesforceActions": []
+        },
+        {
+            "conditionalFormatting": {},
+            "customActions": [],
+            "field": "Account.Name",
+            "label": "Account Name",
+            "linkTemplateEnabled": true,
+            "members": [],
+            "recordDisplayFields": [
+                "AccountId",
+                "Account.Name"
+            ],
+            "recordIdField": "AccountId",
+            "salesforceActions": [],
+            "salesforceActionsEnabled": false
+        },
+        {
+            "conditionalFormatting": {},
+            "customActions": [],
+            "field": "Account.FinServ__FinancialInterests__c",
+            "label": "FinServ Financial Interests",
+            "members": [],
+            "recordDisplayFields": [],
+            "salesforceActions": []
+        },
+        {
+            "conditionalFormatting": {},
+            "customActions": [],
+            "field": "Account.FinServ__InvestmentObjectives__c",
+            "label": "FinServ Investment Objectives",
+            "members": [],
+            "recordDisplayFields": [],
+            "salesforceActions": []
+        },
+        {
+            "conditionalFormatting": {},
+            "customActions": [],
+            "field": "Account.FinServ__RiskTolerance__c",
+            "label": "FinServ Risk Tolerance",
+            "members": [],
+            "recordDisplayFields": [],
+            "salesforceActions": []
+        }
+    ],
+    "measures": [],
+    "organizations": [],
+    "showDetailsDefaultFields": []
+}

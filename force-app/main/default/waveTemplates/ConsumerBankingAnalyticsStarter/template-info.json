@@ -3,7 +3,7 @@
   "label": "Consumer Banking Starter Analytics",
   "name": "ConsumerBankingAnalyticsStarter",
   "description": "Puts the power of Einstein Analytics into the hands of relationship managers to help them move customers up the value chain and increase assets under management. v1.3",
-  "assetVersion": 51.0,
+  "assetVersion": 54.0,
   "variableDefinition": "variables.json",
   "uiDefinition": "ui.json",
   "rules": [

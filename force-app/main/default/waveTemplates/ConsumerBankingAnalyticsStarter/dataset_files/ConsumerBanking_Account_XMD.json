@@ -1,1 +1,64 @@
-{"dates":[],"derivedDimensions":[],"derivedMeasures":[{"conditionalFormatting":{},"field":"sum_HeldAway","format":{"customFormat":"[\"$#,###\",1]","delimiters":{}}},{"conditionalFormatting":{},"field":"sum_FinServ__WalletShare__c","format":{"customFormat":"[\"###%\",100]","delimiters":{}}}],"dimensions":[{"conditionalFormatting":{},"customActions":[],"field":"Name","linkTemplateEnabled":true,"members":[],"recordDisplayFields":["Name","Id","Owner.Name"],"recordIdField":"Id","salesforceActions":[],"salesforceActionsEnabled":false}],"measures":[{"field":"FinServ__AUM__c","format":{"customFormat":"[\"$#,###\",1]","delimiters":{}}},{"field":"FinServ__TotalFinAcctsPrimaryOwner__c","format":{"customFormat":"[\"$#,###\",1]","delimiters":{}}},{"field":"FinServ__TotalFinancialAccounts__c","format":{"customFormat":"[\"$#,###\",1]","delimiters":{}}}],"organizations":[],"showDetailsDefaultFields":[]}
+{
+    "dates": [],
+    "derivedDimensions": [],
+    "derivedMeasures": [
+        {
+            "conditionalFormatting": {},
+            "field": "sum_HeldAway",
+            "format": {
+                "customFormat": "[\"$#,###\",1]",
+                "delimiters": {}
+            }
+        },
+        {
+            "conditionalFormatting": {},
+            "field": "sum_FinServ__WalletShare__c",
+            "format": {
+                "customFormat": "[\"###%\",100]",
+                "delimiters": {}
+            }
+        }
+    ],
+    "dimensions": [
+        {
+            "conditionalFormatting": {},
+            "customActions": [],
+            "field": "Name",
+            "linkTemplateEnabled": true,
+            "members": [],
+            "recordDisplayFields": [
+                "Name",
+                "Id",
+                "Owner.Name"
+            ],
+            "recordIdField": "Id",
+            "salesforceActions": [],
+            "salesforceActionsEnabled": false
+        }
+    ],
+    "measures": [
+        {
+            "field": "FinServ__AUM__c",
+            "format": {
+                "customFormat": "[\"$#,###\",1]",
+                "delimiters": {}
+            }
+        },
+        {
+            "field": "FinServ__TotalFinAcctsPrimaryOwner__c",
+            "format": {
+                "customFormat": "[\"$#,###\",1]",
+                "delimiters": {}
+            }
+        },
+        {
+            "field": "FinServ__TotalFinancialAccounts__c",
+            "format": {
+                "customFormat": "[\"$#,###\",1]",
+                "delimiters": {}
+            }
+        }
+    ],
+    "organizations": [],
+    "showDetailsDefaultFields": []
+}

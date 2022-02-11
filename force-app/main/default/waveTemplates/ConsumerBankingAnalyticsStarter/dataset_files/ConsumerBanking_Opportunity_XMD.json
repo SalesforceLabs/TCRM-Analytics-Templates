@@ -1,1 +1,41 @@
-{"dates":[],"derivedDimensions":[],"derivedMeasures":[{"conditionalFormatting":{},"field":"Win Rate","format":{"customFormat":"[\"###%\",100]","delimiters":{}}}],"dimensions":[{"conditionalFormatting":{},"customActions":[],"field":"Name","linkTemplateEnabled":true,"members":[],"recordDisplayFields":["Id","Owner.Name"],"recordIdField":"Id","salesforceActions":[],"salesforceActionsEnabled":false}],"measures":[{"field":"Amount","format":{"customFormat":"[\"$#,###\",1]","delimiters":{}}}],"organizations":[],"showDetailsDefaultFields":[]}
+{
+    "dates": [],
+    "derivedDimensions": [],
+    "derivedMeasures": [
+        {
+            "conditionalFormatting": {},
+            "field": "Win Rate",
+            "format": {
+                "customFormat": "[\"###%\",100]",
+                "delimiters": {}
+            }
+        }
+    ],
+    "dimensions": [
+        {
+            "conditionalFormatting": {},
+            "customActions": [],
+            "field": "Name",
+            "linkTemplateEnabled": true,
+            "members": [],
+            "recordDisplayFields": [
+                "Id",
+                "Owner.Name"
+            ],
+            "recordIdField": "Id",
+            "salesforceActions": [],
+            "salesforceActionsEnabled": false
+        }
+    ],
+    "measures": [
+        {
+            "field": "Amount",
+            "format": {
+                "customFormat": "[\"$#,###\",1]",
+                "delimiters": {}
+            }
+        }
+    ],
+    "organizations": [],
+    "showDetailsDefaultFields": []
+}
